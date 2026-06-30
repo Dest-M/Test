@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Контроль заказов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .form {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        .form input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .form button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📦 Контроль заказов</h1>
+    <p><strong>Кейс № 1:</strong> Интеграция системы контроля заказов</p>
+    <p><strong>Сударева Анна Дмитриевна</strong> — ООО «Айти-Солюшн»</p>
+
+    <div class="form">
+        <h3>➕ Добавить заказ</h3>
+        <input type="text" id="client" placeholder="Клиент">
+        <input type="text" id="product" placeholder="Товар">
+        <input type="number" id="amount" placeholder="Сумма">
+        <button onclick="addOrder()">Добавить</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Клиент</th>
+                <th>Товар</th>
+                <th>Сумма</th>
+                <th>Статус</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody id="orders">
+            <tr>
+                <td>1</td>
+                <td>Иванов И.И.</td>
+                <td>Ноутбук</td>
+                <td>45000 ₽</td>
+                <td>Новый</td>
+                <td><button class="delete" onclick="deleteRow(this)">Удалить</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Петрова А.С.</td>
+                <td>Смартфон</td>
+                <td>32000 ₽</td>
+                <td>В обработке</td>
+                <td><button class="delete" onclick="deleteRow(this)">Удалить</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let nextId = 3;
+
+        function addOrder() {
+            let client = document.getElementById('client').value;
+            let product = document.getElementById('product').value;
+            let amount = document.getElementById('amount').value;
+
+            if (!client || !product || !amount) {
+                alert('Заполните все поля!');
+                return;
+            }
+
+            let table = document.getElementById('orders');
+            let row = table.insertRow();
+
+            row.innerHTML = `
+                <td>${nextId}</td>
+                <td>${client}</td>
+                <td>${product}</td>
+                <td>${amount} ₽</td>
+                <td>Новый</td>
+                <td><button class="delete" onclick="deleteRow(this)">Удалить</button></td>
+            `;
+
+            nextId++;
+            document.getElementById('client').value = '';
+            document.getElementById('product').value = '';
+            document.getElementById('amount').value = '';
+        }
+
+        function deleteRow(btn) {
+            if (confirm('Удалить заказ?')) {
+                btn.parentElement.parentElement.remove();
+            }
+        }
+    </script>
+
+</body>
+</html>
