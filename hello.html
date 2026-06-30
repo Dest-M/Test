@@ -50,6 +50,15 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+        .status-select {
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .status-select option {
+            padding: 4px;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +92,15 @@
                 <td>Иванов И.И.</td>
                 <td>Ноутбук</td>
                 <td>45000 ₽</td>
-                <td>Новый</td>
+                <td>
+                    <select class="status-select" onchange="updateStatus(this)">
+                        <option value="Новый" selected>Новый</option>
+                        <option value="В обработке">В обработке</option>
+                        <option value="Отправлен">Отправлен</option>
+                        <option value="Доставлен">Доставлен</option>
+                        <option value="Отменен">Отменен</option>
+                    </select>
+                </td>
                 <td><button class="delete" onclick="deleteRow(this)">Удалить</button></td>
             </tr>
             <tr>
@@ -91,7 +108,15 @@
                 <td>Петрова А.С.</td>
                 <td>Смартфон</td>
                 <td>32000 ₽</td>
-                <td>В обработке</td>
+                <td>
+                    <select class="status-select" onchange="updateStatus(this)">
+                        <option value="Новый">Новый</option>
+                        <option value="В обработке" selected>В обработке</option>
+                        <option value="Отправлен">Отправлен</option>
+                        <option value="Доставлен">Доставлен</option>
+                        <option value="Отменен">Отменен</option>
+                    </select>
+                </td>
                 <td><button class="delete" onclick="deleteRow(this)">Удалить</button></td>
             </tr>
         </tbody>
@@ -118,7 +143,15 @@
                 <td>${client}</td>
                 <td>${product}</td>
                 <td>${amount} ₽</td>
-                <td>Новый</td>
+                <td>
+                    <select class="status-select" onchange="updateStatus(this)">
+                        <option value="Новый" selected>Новый</option>
+                        <option value="В обработке">В обработке</option>
+                        <option value="Отправлен">Отправлен</option>
+                        <option value="Доставлен">Доставлен</option>
+                        <option value="Отменен">Отменен</option>
+                    </select>
+                </td>
                 <td><button class="delete" onclick="deleteRow(this)">Удалить</button></td>
             `;
 
@@ -126,6 +159,11 @@
             document.getElementById('client').value = '';
             document.getElementById('product').value = '';
             document.getElementById('amount').value = '';
+        }
+
+        function updateStatus(select) {
+            // Статус обновлен, можно добавить дополнительную логику при необходимости
+            console.log('Статус изменен на: ' + select.value);
         }
 
         function deleteRow(btn) {
