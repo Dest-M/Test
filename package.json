@@ -1,0 +1,10 @@
+{
+  "name": "kanban-orders",
+  "version": "1.0.0",
+  "description": "Kanban order control system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {}
+}
